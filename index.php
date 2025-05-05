@@ -1,8 +1,17 @@
 <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create_groom'])) {
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['creare_mire'])) {
         include("register_m.php");
         exit();
-    }
+        }
+
+
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['creare_furnizor'])) {
+        include("register_f.php");
+        exit();
+        }
+
 ?>
 
 
@@ -85,13 +94,22 @@
 
                   <div class="d-flex align-items-center justify-content-center pb-4">
                       <p class="mb-0 me-2">Don't have an account?</p>
-                      <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-danger">Creaza cont furnizor</button>
-                       <!-- Form pentru "Crează cont mire" -->
-                    <form method="post" style="display: inline;">
-                        <button type="submit" name="create_groom" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-danger ms-2">Crează cont mire
+
+                      <form method="post" style="display: inline;">
+                        <button type="submit" name="creare_furnizor" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-danger ms-2">Crează cont furnizor
                         </button>
                     </form>
-                    </div>
+                       <!-- Form pentru "Crează cont mire" -->
+                    <form method="post" style="display: inline;">
+                        <button type="submit" name="creare_mire" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-danger ms-2">Crează cont mire
+                        </button>
+                    </form>
+                    </div>
+
+                    
+
+                  
+
 
                 </div>
               </div>
