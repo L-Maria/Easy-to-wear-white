@@ -1,4 +1,5 @@
 <?php
+
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['creare_mire'])) {
         include("register_m.php");
         exit();
@@ -10,6 +11,7 @@
         include("register_f.php");
         exit();
         }
+
 ?>
 
 
@@ -90,8 +92,9 @@
 
                   </form>
 
-                    <div class="d-flex align-items-center justify-content-center pb-4">
+                  <div class="d-flex align-items-center justify-content-center pb-4">
                       <p class="mb-0 me-2">Don't have an account?</p>
+
                       <form method="post" style="display: inline;">
                         <button type="submit" name="creare_furnizor" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-danger ms-2">Crează cont furnizor
                         </button>
@@ -106,6 +109,7 @@
                     
 
                   
+
 
                 </div>
               </div>
