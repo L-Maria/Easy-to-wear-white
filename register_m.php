@@ -7,52 +7,81 @@
   <title>Register</title>
   <link rel="stylesheet" href="register_m.css"> <!-- LEGĂTURA CU CSS -->
   <!-- Bootstrap (dacă folosești MDB) -->
-   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css" rel="stylesheet"/>
+  <style>
+    /* Asigurăm că formularul va fi scrollabil fără a afecta alte elemente */
+    .form-container {
+      max-height: 80vh;  /* Se ajustează în funcție de înălțimea dorită */
+      overflow-y: auto;  /* Permite scroll vertical când formularul este mai mare decât containerul */
+    }
+
+    /* Stilizare pentru card pentru a rămâne pe centrul paginii */
+    .card {
+      border-radius: 15px;
+    }
+
+    /* Dacă dorim să menținem background-ul fix */
+    .bg-image {
+      background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');
+      background-attachment: fixed;
+    }
+  </style>
 </head>
 
 <body>
 
-<section class="vh-100 bg-image"
-  style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+<section class="bg-image vh-100">
   <div class="mask d-flex align-items-center h-100 gradient-custom-3">
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-          <div class="card" style="border-radius: 15px;">
-            <div class="card-body p-5">
+          <div class="card">
+            <div class="card-body p-5 form-container">
               <h2 class="text-uppercase text-center mb-5">Create an account</h2>
 
               <form>
-
-                <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example1cg">Your Name</label>
+                <div class="mb-4">
+                  <label class="form-label" for="form3Example1cdg">Nume</label>
+                  <input type="text" id="form3Example1cdg" class="form-control form-control-lg" />
                 </div>
 
-                <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="email" id="form3Example3cg" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example3cg">Your Email</label>
+                <div class="mb-4">
+                  <label class="form-label" for="form3Example2cdg">Email</label>
+                  <input type="text" id="form3Example2cdg" class="form-control form-control-lg" />
                 </div>
 
-                <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="password" id="form3Example4cg" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example4cg">Password</label>
+                <div class="mb-4">
+                  <label class="form-label" for="form3Example6cdg">Parola</label>
+                  <input type="password" id="form3Example6cdg" class="form-control form-control-lg" />
                 </div>
 
-                <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="password" id="form3Example4cdg" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example4cdg">Repeat your password</label>
+                <div class="mb-4">
+                  <label class="form-label" for="form3Example4cdg">Numar de telefon</label>
+                  <input type="tel" id="form3Example4cdg" class="form-control form-control-lg" />
                 </div>
 
-                <div class="form-check d-flex justify-content-center mb-5">
-                  <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
-                  <label class="form-check-label" for="form2Example3g">
-                    I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
-                  </label>
+                <div class="mb-4">
+                  <label class="form-label" for="form3Example5cdg">Religie</label>
+                  <input type="text" id="form3Example5cdg" class="form-control form-control-lg" />
+                </div>
+
+                <div class="mb-4">
+                  <label class="form-label" for="form3Example6cdg">Data nuntii</label>
+                  <input type="date" id="form3Example6cdg" class="form-control form-control-lg" />
+                </div>
+
+                <div class="mb-4">
+                  <label class="form-label" for="form3Example7cdg">Locatie</label>
+                  <input type="text" id="form3Example7cdg" class="form-control form-control-lg" />
+                </div>
+
+                <div class="mb-4">
+                  <label class="form-label" for="form3Example8cdg">Numar de invitati</label>
+                  <input type="text" id="form3Example8cdg" class="form-control form-control-lg" />
                 </div>
 
                 <div class="d-flex justify-content-center">
-                  <button  type="button" data-mdb-button-init
+                  <button type="button" data-mdb-button-init
                     data-mdb-ripple-init class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
                 </div>
 
@@ -68,5 +97,6 @@
     </div>
   </div>
 </section>
+
 </body>
 </html>
