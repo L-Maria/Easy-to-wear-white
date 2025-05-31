@@ -1,0 +1,134 @@
+/* Font elegant, serif pentru titluri si sans-serif pentru text */
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    background-color: #faf9f7;
+    color: #3e3e3e;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    font-family: 'Playfair Display', serif;
+    background-color: #fff;
+    padding: 30px 20px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #5a4a42;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(90, 74, 66, 0.15);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+main {
+    display: flex;
+    flex: 1;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    gap: 60px;
+}
+
+.panel-stanga {
+    flex: 1;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 30px 25px;
+    box-shadow: 0 6px 15px rgba(90, 74, 66, 0.1);
+}
+
+.panel-stanga h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #d8cfc7;
+    padding-bottom: 10px;
+    color: #7c6a5a;
+}
+
+.panel-stanga p {
+    font-size: 1rem;
+    margin: 10px 0;
+    line-height: 1.5;
+    color: #6b5e51;
+}
+
+.panel-stanga strong {
+    color: #5a4a42;
+}
+
+.todo {
+    flex: 2;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 30px 35px;
+    box-shadow: 0 6px 15px rgba(90, 74, 66, 0.1);
+}
+
+.todo h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #7c6a5a;
+    border-bottom: 2px solid #d8cfc7;
+    padding-bottom: 12px;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    margin-bottom: 18px;
+    border-radius: 8px;
+    background-color: #f7f3ee;
+    box-shadow: inset 0 0 8px rgba(90, 74, 66, 0.05);
+    transition: background-color 0.3s ease;
+}
+
+.task:hover {
+    background-color: #e8dfd3;
+}
+
+.task button {
+    background-color: transparent;
+    border: none;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: #7c6a5a;
+    cursor: pointer;
+    flex-grow: 1;
+    text-align: left;
+    padding: 0;
+    transition: color 0.3s ease;
+}
+
+.task button:hover {
+    color: #5a4a42;
+    text-decoration: underline;
+}
+
+.task input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    accent-color: #7c6a5a;
+    border-radius: 5px;
+    box-shadow: 0 0 0 1.5px #7c6a5a inset;
+    transition: accent-color 0.3s ease;
+}
+
+/* Responsive pentru mobil */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+        margin: 20px;
+        gap: 30px;
+    }
+    .panel-stanga, .todo {
+        flex: unset;
+        width: 100%;
+    }
+}
