@@ -55,8 +55,8 @@
 
         // Verifică parola
         if (password_verify($parola, $parola_hash)) {
-                $_SESSION['users_id'] = $id;
-                $_SESSION['users_nume'] = $nume;
+                $_SESSION['user_id'] = $id;
+                $_SESSION['user_nume'] = $nume;
                 $_SESSION['tip_utilizator'] = $tip_utilizator;
 
                 header("Location: $redirect");

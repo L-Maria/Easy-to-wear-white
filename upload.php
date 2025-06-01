@@ -22,4 +22,26 @@ if (move_uploaded_file($_FILES["profile_pic"]["tmp_name"], $targetFile)) {
 } else {
     echo "Eroare la upload.";
 }
+
+
+
+$uploadDir = "uploads/";
+
+if (!is_dir($uploadDir)) {
+    mkdir($uploadDir, 0777, true);
+}
+
+foreach ($_FILES['images']['tmp_name'] as $key => $tmpName) {
+    $fileName = basename($_FILES['images']['name'][$key]);
+    $targetFile = $uploadDir . $fileName;
+
+    if (move_uploaded_file($tmpName, $targetFile)) {
+        echo "Imaginea $fileName a fost încărcată cu succes.<br>";
+    } else {
+        echo "Eroare la încărcarea imaginii $fileName.<br>";
+    }
+}
 ?>
+
+
+

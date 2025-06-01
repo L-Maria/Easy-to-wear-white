@@ -13,6 +13,26 @@ if ($row = $result->fetch_assoc()) {
     $email = $row['email'];
     $telefon = $row['telefon'];
 }
+
+// Salvează detalii dacă formularul a fost trimis
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['detalii'])) {
+    $detalii = $conn->real_escape_string($_POST['detalii']);
+    $stmt = $conn->prepare("UPDATE furnizor SET detalii = ? WHERE id = ?");
+    $stmt->bind_param("si", $detalii, $user_id);
+    $stmt->execute();
+    $stmt->close();
+}
+
+// Citește detaliile existente
+$stmt = $conn->prepare("SELECT detalii FROM furnizor WHERE id = ?");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$stmt->bind_result($detaliiExistente);
+$stmt->fetch();
+$stmt->close();
+
+
+
 ?>
 
 
@@ -111,41 +131,114 @@ if ($row = $result->fetch_assoc()) {
               <p class="text-muted medium mb-1"><?php echo htmlspecialchars($email); ?></p>
               <p class="text-muted medium"><?php echo htmlspecialchars($telefon); ?></p>
             </div>
-              
-              
-            </div>
+
+
+
+<form method="post" style="max-width: 500px; margin-top: 20px;">
+  <label for="detalii" style="font-weight: bold;">Detalii servicii:
+  <textarea name="detalii" id="detalii" rows="5" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+<?php echo htmlspecialchars($detaliiExistente ?? ''); ?>
+  </textarea>
+  <button type="submit" class="btn btn-primary mt-2">Salvează</button>
+</form>
+
+ 
+           </div>
             <div class="col-lg-8">
-              <div class="d-block d-md-flex justify-content-between mt-4 mt-md-0">
-                <div class="text-center mt-4 mt-md-0">
-                  <button class="btn btn-outline-primary">Message</button>
-                  <button class="btn btn-primary">Request</button>
-                </div>
+            <div class="d-flex justify-content-between align-items-center mt-4 mt-md-0">
+
+
+
+              <!-- Stânga: buton Message -->
+              <div>
+                <form action="servicii_upload.php" method="POST" enctype="multipart/form-data">
+                  <input type="file" name="images[]" accept="image/*" multiple required>
+                  <button type="submit" class="btn btn-primary btn-lg">Încarcă pozele</button>
+                </form>
+
               </div>
-              <div class="profile-feed">
-                <div class="d-flex align-items-start profile-feed-item">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="profile" class="img-sm rounded-circle">
-                  <div class="ml-4">
-                    <h6>
-                      Mason Beck
-                      <small class="ml-4 text-muted"><i class="mdi mdi-clock mr-1"></i>10 hours</small>
-                    </h6>
-                    <p>
-                      There is no better advertisement campaign that is low cost and also successful at the same time.
-                    </p>
-                    <p class="small text-muted mt-2 mb-0">
-                      <span>
-                        <i class="mdi mdi-star mr-1"></i>4
-                      </span>
-                      <span class="ml-2">
-                        <i class="mdi mdi-comment mr-1"></i>11
-                      </span>
-                      <span class="ml-2">
-                        <i class="mdi mdi-reply"></i>
-                      </span>
-                    </p>
-                  </div>
-                </div>
-                <div class="d-flex align-items-start profile-feed-item">
+
+              <!-- Dreapta: formular cu buton Request -->
+              <div>
+                <form action="notificari.php" method="get" class="m-0">
+                  <button type="submit" class="btn btn-outline-primary btn-lg">Notificari</button>
+                </form>
+              </div>
+
+              </div>
+
+              <div class="profile-feed mt-5">
+
+
+  
+
+              <div style="padding: 20px;">
+              <?php
+                // Conectare la baza de date
+
+                if ($conn->connect_error) {
+                  die("Conexiune eșuată: " . $conn->connect_error);
+                }
+
+                // Salvează fișierul pe server și calea în baza de date
+                if (isset($_FILES['image'])) {
+                  $uploadDir = "uploads/";
+    
+
+                  $filename = time() . "_" . basename($_FILES["image"]["name"]);
+                  $targetFile = $uploadDir . $filename;
+
+                  if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+                    $furnizor_id = $_SESSION['user_id'];
+                    $stmt = $conn->prepare("INSERT INTO images (path, furnizor_id) VALUES (?, ?)");
+                    $stmt->bind_param("si", $targetFile, $furnizor_id);
+                    $stmt->execute();
+                    $stmt->close();
+                  }
+                }
+
+                // Afișează galeria
+                $furnizor_id = $_SESSION['user_id'];
+
+                  $stmt = $conn->prepare("SELECT path FROM images WHERE furnizor_id = ?");
+                  $stmt->bind_param("i", $furnizor_id);
+                  $stmt->execute();
+                  $result = $stmt->get_result();
+
+
+                echo '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">';
+
+                while ($row = $result->fetch_assoc()) {
+                  echo '<div class="image-box">';
+                  echo '<img src="' . htmlspecialchars($row['path']) . '" style="width: 100%; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1);" />';
+                  echo '</div>';
+                }
+
+                echo '</div>';
+
+                $conn->close();
+                ?>
+
+                <style>
+                .image-box {
+                  overflow: hidden;
+                  transition: transform 0.3s;
+                }
+                .image-box:hover {
+                  transform: scale(1.03);
+                }
+              </style>
+              </div>
+
+
+
+
+
+
+
+
+
+                <div class="d-flex align-items-start profile-feed-item mt-5">
                   <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="profile" class="img-sm rounded-circle">
                   <div class="ml-4">
                     <h6>

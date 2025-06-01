@@ -1,7 +1,8 @@
 <?php
+session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Verifică dacă toate câmpurile există în $_POST
-    if (isset($_POST['nume'], $_POST['email'], $_POST['parola'], $_POST['parola2'], $_POST['telefon'])) {
+    if (isset($_POST['nume'], $_POST['email'], $_POST['parola'], $_POST['parola2'], $_POST['telefon'], $_POST['serviciu'])) {
         // Verifică dacă parolele coincid
         if ($_POST['parola'] !== $_POST['parola2']) {
             $error = "Parolele nu coincid!";
@@ -17,13 +18,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $conn->real_escape_string($_POST['email']);
             $parola = password_hash($_POST['parola'], PASSWORD_DEFAULT);
             $telefon = $conn->real_escape_string($_POST['telefon']);
+            $serviciu = $conn->real_escape_string($_POST['serviciu']);
 
             // Inserare în baza de date
-            $sql = "INSERT INTO furnizor(nume, email, parola, telefon)
-                    VALUES ('$nume', '$email', '$parola', '$telefon')";
+            $sql = "INSERT INTO furnizor(nume, email, parola, telefon, serviciu)
+                    VALUES ('$nume', '$email', '$parola', '$telefon', '$serviciu')";
             if ($conn->query($sql) === TRUE) {
                 // Redirect după inserare cu succes
-                header("Location: home_f.php");
+                $id_nou = $conn->insert_id;
+                $_SESSION['user_id']= $id_nou;
+                header("Location: home_f.php?id=" .$id_nou);
                 exit();  // întotdeauna folosește exit după header redirect!
             } else {
                 $error = "Eroare la crearea contului: " . $conn->error;
@@ -89,9 +93,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <div data-mdb-input-init class="form-outline mb-4">
                   <input type="tel" id="telefon" name="telefon" class="form-control form-control-lg" required
-                         value="<?= isset($_POST['telefon']) ? htmlspecialchars($_POST['telefon']) : '' ?>" />
+                    value="<?= isset($_POST['telefon']) ? htmlspecialchars($_POST['telefon']) : '' ?>" />
                   <label class="form-label" for="telefon">Numarul tau de telefon</label>
                 </div>
+
+                <div data-mdb-input-init class="form-group mb-4">
+                  <label for="serviciu">Alege tipul de serviciu:</label>
+                  <select class="form-control" name="serviciu" required>
+                    <option value="">-- Selectează --</option>
+                    <option value="1">Locatie</option>
+                    <option value="2">Invitatii</option>
+                    <option value="3">Decor</option>
+                    <option value="4">Formatie</option>
+                    <option value="5">Foto/Video</option>
+                    <option value="5">Gustari</option>
+                    <option value="4">Atelier</option>
+                    <option value="5">Altele</option>
+                  </select>
+                </div>
+
+
+
 
                 <div class="d-flex justify-content-center">
                   <button type="submit" data-mdb-button-init data-mdb-ripple-init

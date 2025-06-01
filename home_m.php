@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'config\db.php';
 
 if (!isset($_SESSION['user_id'])) {
     echo "Nu este identificat niciun utilizator.";
@@ -10,23 +11,47 @@ $host = 'localhost';
 $db = 'wedding_app';
 $user = 'root';
 $pass = '';
+$user_id = $_SESSION['user_id'];
 
 $conn = new mysqli($host, $user, $pass, $db);
 if ($conn->connect_error) {
     die("Conexiunea a eșuat: " . $conn->connect_error);
 }
 
-$user_id = intval($_SESSION['user_id']);
-$sql_user = "SELECT * FROM users WHERE id = $user_id";
-$res_user = $conn->query($sql_user);
+// Încarcă datele utilizatorului
+$stmt_user = $conn->prepare("SELECT * FROM users WHERE id = ?");
+$stmt_user->bind_param("i", $user_id);
+$stmt_user->execute();
+$result_user = $stmt_user->get_result();
 
-if ($res_user->num_rows != 1) {
-    echo "Userul nu a fost găsit.";
+if ($result_user->num_rows !== 1) {
+    echo "Utilizatorul nu a fost găsit.";
     exit();
 }
 
-$user_data = $res_user->fetch_assoc();
+$user_data = $result_user->fetch_assoc();
+$stmt_user->close();
+
+// Salvează detalii dacă formularul a fost trimis
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['detalii'])) {
+    $detalii = trim($conn->real_escape_string($_POST['detalii']));
+    $stmt = $conn->prepare("UPDATE users SET detalii = ? WHERE id = ?");
+    $stmt->bind_param("si", $detalii, $user_id);
+    $stmt->execute();
+    $stmt->close();
+}
+
+// Citește detaliile existente
+$stmt = $conn->prepare("SELECT detalii FROM users WHERE id = ?");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$stmt->bind_result($detaliiExistente);
+$stmt->fetch();
+$stmt->close();
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="ro">
@@ -49,6 +74,14 @@ $user_data = $res_user->fetch_assoc();
         <p><strong>Data nuntă:</strong> <?= htmlspecialchars($user_data['data_nunta']) ?></p>
         <p><strong>Locație:</strong> <?= htmlspecialchars($user_data['locatie']) ?></p>
         <p><strong>Nr invitați:</strong> <?= htmlspecialchars($user_data['invitati']) ?></p>
+
+        <form method="post" style="max-width: 500px; margin-top: 20px;">
+            <label for="detalii" style="font-weight: bold;">Imi doresc...
+            <textarea name="detalii" id="detalii" rows="5" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+            <?php echo htmlspecialchars($detaliiExistente ?? ''); ?>
+            </textarea>
+            <button type="submit" class="btn btn-primary mt-2">Salvează</button>
+        </form>
     </div>
 
     <div class="todo">
@@ -61,15 +94,17 @@ $user_data = $res_user->fetch_assoc();
             "Formatie",
             "Foto/Video",
             "Gustari",
-            "Haine Mire/Mireasa",
-            "Haine Domnisoare de Onoare/Cavaleri de Onoare"
+            "Atelier",
+            "Altele"
         ];
 
         foreach ($taskuri as $task) {
             echo '<div class="task">';
-            echo "<button>$task</button>";
+            echo '<a href="categorii_f.php?serviciu=' . urlencode($task) . '" target="_blank">';
+            echo '<button>' . htmlspecialchars($task) . '</button>';
+            echo '</a>';
             echo '<input type="checkbox">';
-            echo '</div>';
+        echo '</div>';
         }
         ?>
     </div>
