@@ -101,14 +101,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   <label for="serviciu">Alege tipul de serviciu:</label>
                   <select class="form-control" name="serviciu" required>
                     <option value="">-- Selectează --</option>
-                    <option value="1">Locatie</option>
-                    <option value="2">Invitatii</option>
-                    <option value="3">Decor</option>
-                    <option value="4">Formatie</option>
-                    <option value="5">Foto/Video</option>
-                    <option value="5">Gustari</option>
-                    <option value="4">Atelier</option>
-                    <option value="5">Altele</option>
+                    <option value="Locatie">Locatie</option>
+                    <option value="Invitatii">Invitatii</option>
+                    <option value="Decor">Decor</option>
+                    <option value="Formatie">Formatie</option>
+                    <option value="Foto/Video">Foto/Video</option>
+                    <option value="Gustari">Gustari</option>
+                    <option value="Atelier">Atelier</option>
+                    <option value="Altele">Altele</option>
                   </select>
                 </div>
 
