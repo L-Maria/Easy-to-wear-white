@@ -4,7 +4,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Verifică dacă toate câmpurile există în $_POST
     if (isset($_POST['nume'], $_POST['email'], $_POST['parola'], $_POST['telefon'], $_POST['religie'], $_POST['data_nunta'], $_POST['locatie'], $_POST['invitati'])) {
         // Conexiune la baza de date
-        $conn = new mysqli("localhost", "root", "", "mire_db");
+        $conn = new mysqli("localhost", "root", "", "wedding_app");
         if ($conn->connect_error) {
             die("Conexiune eșuată: " . $conn->connect_error);
         }

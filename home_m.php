@@ -7,7 +7,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $host = 'localhost';
-$db = 'mire_db';
+$db = 'wedding_app';
 $user = 'root';
 $pass = '';
 

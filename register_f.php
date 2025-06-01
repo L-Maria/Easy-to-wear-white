@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error = "Parolele nu coincid!";
         } else {
             // Conexiune la baza de date
-            $conn = new mysqli("localhost", "root", "", "furnizor_db");
+            $conn = new mysqli("localhost", "root", "", "wedding_app");
             if ($conn->connect_error) {
                 die("Conexiune eșuată: " . $conn->connect_error);
             }
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $telefon = $conn->real_escape_string($_POST['telefon']);
 
             // Inserare în baza de date
-            $sql = "INSERT INTO furnizori (nume, email, parola, telefon)
+            $sql = "INSERT INTO furnizor(nume, email, parola, telefon)
                     VALUES ('$nume', '$email', '$parola', '$telefon')";
             if ($conn->query($sql) === TRUE) {
                 // Redirect după inserare cu succes
