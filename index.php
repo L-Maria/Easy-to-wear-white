@@ -1,4 +1,3 @@
-
 <?php
     session_start();
  
@@ -49,25 +48,24 @@
 
 
         if ($stmt->num_rows > 0) {
-            $stmt->bind_result($id, $nume, $parola_hash);
-            $stmt->fetch();
-        }
+    $stmt->bind_result($id, $nume, $parola_hash);
+    $stmt->fetch();
 
-        // Verifică parola
-        if (password_verify($parola, $parola_hash)) {
-                $_SESSION['user_id'] = $id;
-                $_SESSION['user_nume'] = $nume;
-                $_SESSION['tip_utilizator'] = $tip_utilizator;
+    // Verifică parola
+          if (password_verify($parola, $parola_hash)) {
+              $_SESSION['user_id'] = $id;
+              $_SESSION['user_nume'] = $nume;
+              $_SESSION['tip_utilizator'] = $tip_utilizator;
 
-                header("Location: $redirect");
-                exit();
-            } else {
-                $eroare = "Parolă incorectă.";
-            }
-        } else {
-            $eroare = "Emailul nu a fost găsit.";
-        }
-
+              header("Location: $redirect");
+              exit();
+          } else {
+              $eroare = "Parolă incorectă.";
+          }
+      } else {
+          $eroare = "Emailul nu a fost găsit.";
+      }
+    }
         $stmt->close();
     
     $conn->close();
@@ -77,120 +75,82 @@
 ?>
 
 
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Easy to wear white</title>
 
-  <!-- MDBootstrap CSS -->
-  <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css"
-    rel="stylesheet"
-  />
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Great+Vibes&family=Open+Sans&display=swap" rel="stylesheet">
 
-  <!-- Fundal cu imagine -->
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      background-image: url("images/background.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-    }
+  <!-- MDBootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css" rel="stylesheet" />
 
-    .card {
-      background-color: rgba(255, 255, 255, 0.10);
-      color: white;
-    }
-
-    .text-white-bg {
-      background-color: rgba(255, 255, 255, 0.10);
-      color: white;
-    }
-  </style>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="index.css?v=3" />
 </head>
 
 <body>
-  <section class="h-100 d-flex align-items-center" style="background-color: transparent;">
+  <section class="h-100 d-flex align-items-center main-section">
     <div class="container py-5 h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="row justify-content-center align-items-center h-100">
         <div class="col-xl-10">
-          <div class="card rounded-3 text-black">
+          <div class="card shadow-lg wedding-card">
             <div class="row g-0">
-              <div class="col-lg-6">
-                <div class="card-body p-md-5 mx-md-4">
 
-                  <div class="text-center">
-                    <img src="images/verighete.png"
-                      style="width: 185px;" alt="logo">
-                    <h4 class="mt-1 mb-5 pb-1">We are The Lotus Team</h4>
+              <!-- Left Panel -->
+              <div class="col-lg-6 p-5 left-panel">
+                <div class="text-center mb-5 logo-area">
+                  <img src="images/verighete.png" alt="logo" class="logo-img" />
+                  <h1 class="title">Easy to wear white</h1>
+                </div>
+
+                <form method="POST" action="index.php" class="login-form">
+                  <div class="form-outline mb-4">
+                    <input type="email" name="email" class="form-control" placeholder="Email" required />
+                    <label class="form-label">Email</label>
                   </div>
 
-                  <form method="POST" action="index.php">
-                    <p>Please login to your account</p>
+                  <div class="form-outline mb-4">
+                    <input type="password" name="parola" class="form-control" placeholder="Parola" required />
+                    <label class="form-label">Parola</label>
+                  </div>
 
-                    <div data-mdb-input-init class="form-outline mb-4">
-                      <input type="email" name="email" class="form-control" required/>
-                      <label class="form-label" for="email">Username</label>
-                    </div>
+                  <div class="form-outline mb-4">
+                    <select name="tip_utilizator" class="form-select" required>
+                      <option value="" disabled selected>Tip utilizator</option>
+                      <option value="mire">👰 Mire</option>
+                      <option value="furnizor">💼 Furnizor</option>
+                    </select>
+                  </div>
 
-                    <div data-mdb-input-init class="form-outline mb-4">
-                      <input type="password" name="parola" class="form-control" required/>
-                      <label class="form-label" for="form2Example22">Password</label>
-                    </div>
+                  <div class="text-center mb-4">
+                    <button type="submit" name="login" class="btn btn-primary btn-gradient w-100">Autentificare</button>
+                  </div>
+                </form>
 
-                    <div class="form-outline mb-4">
-                      <select name="tip_utilizator" class="form-select" required>
-                        <option value="" disabled selected>Alege tipul de utilizator</option>
-                        <option value="mire">👰 Mire</option>
-                        <option value="furnizor">💼 Furnizor</option>
-                      </select>
-                    </div>
-
-
-                    <div class="text-center pt-1 mb-5 pb-1">
-                      <button type="submit" name="login" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Logare</button>
-                    </div>
-
-
-
-
+                <div class="d-flex justify-content-between register-buttons">
+                  <form method="get" action="register_m.php">
+                    <button type="submit" class="btn btn-outline-primary">Crează cont mire</button>
                   </form>
-
-                  <div class="d-flex align-items-center justify-content-center pb-4">
-                      <p class="mb-0 me-2">Don't have an account?</p>
-                      
-                      <form method="get" action="register_m.php" style="display: inline;">
-                          <button type="submit" class="btn btn-outline-danger ms-2">Crează cont mire</button>
-                      </form>
-
-                      <form method="get" action="register_f.php" style="display: inline;">
-                          <button type="submit" class="btn btn-outline-danger ms-2">Crează cont furnizor</button>
-                      </form>
-                    </div>
-
-                    
-
-                  
-
-
+                  <form method="get" action="register_f.php">
+                    <button type="submit" class="btn btn-outline-primary">Crează cont furnizor</button>
+                  </form>
                 </div>
               </div>
-    
-              <div class="col-lg-6 d-flex align-items-center text-white-bg">
-                <div class="px-3 py-4 p-md-5 mx-md-4">
-                  <h4 class="mb-4">We are more than just a company</h4>
-                  <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+              <!-- Right Panel -->
+              <div class="col-lg-6 right-panel d-flex align-items-center justify-content-center">
+                <div class="right-content">
+                  <h2>Eleganță și Emoție</h2>
+                  <p>
+                    Transformă-ți nunta într-o poveste de vis. Conectăm miri cu furnizori premium, pentru momente de neuitat, într-o experiență elegantă și intuitivă.
+                  </p>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
@@ -198,10 +158,6 @@
     </div>
   </section>
 
-  <!-- MDBootstrap JS -->
-  <script
-    type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"
-  ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
 </body>
 </html>
