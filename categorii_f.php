@@ -1,5 +1,6 @@
 <?php
 // categorii_f.php
+session_start();
 include 'config/db.php';
 
 $serviciu = $_GET['serviciu'] ?? '';
@@ -10,11 +11,14 @@ if (!$serviciu) {
 }
 
 // Interogare furnizori după tip serviciu
-$stmt = $conn->prepare("SELECT nume, email, telefon FROM furnizor WHERE serviciu = ?");
+$stmt = $conn->prepare("SELECT id, nume, email, telefon FROM furnizor WHERE serviciu = ?");
 $stmt->bind_param("s", $serviciu);
 $stmt->execute();
 $result = $stmt->get_result();
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="ro">
@@ -40,8 +44,16 @@ $result = $stmt->get_result();
             echo '<div class="furnizor">';
             echo '<strong>' . htmlspecialchars($row['nume']) . '</strong><br>';
             echo 'Email: ' . htmlspecialchars($row['email']) . '<br>';
-            echo 'Telefon: ' . htmlspecialchars($row['telefon']);
+            echo 'Telefon: ' . htmlspecialchars($row['telefon']) . '<br><br>';
+
+            // Buton către profilul furnizorului
+            echo '<form method="get" action="read_only_f.php" style="margin-top: 10px;">';
+            echo '<input type="hidden" name="id" value="' . htmlspecialchars($row['id']) . '">';
+            echo '<button type="submit" style="padding: 6px 12px; background-color: #007bff; color: white; border: none; border-radius: 4px;">Vezi profil</button>';
+            echo '</form>';
+
             echo '</div>';
+
         }
     } else {
         echo "<p>Nu există furnizori pentru acest serviciu.</p>";
