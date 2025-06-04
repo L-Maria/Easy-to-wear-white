@@ -89,7 +89,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css" rel="stylesheet" />
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="index.css?v=3" />
+  <link rel="stylesheet" href="index.css?v=4" />
 </head>
 
 <body>
@@ -98,13 +98,16 @@
       <div class="row justify-content-center align-items-center h-100">
         <div class="col-xl-10">
           <div class="card shadow-lg wedding-card">
+            <div class="header-title">
+              <h1 class="title">Easy to wear white</h1>
+            </div>
             <div class="row g-0">
-
+              
               <!-- Left Panel -->
               <div class="col-lg-6 p-5 left-panel">
                 <div class="text-center mb-5 logo-area">
-                  <img src="images/verighete.png" alt="logo" class="logo-img" />
-                  <h1 class="title">Easy to wear white</h1>
+
+                  
                 </div>
 
                 <form method="POST" action="index.php" class="login-form">
@@ -146,7 +149,7 @@
                 <div class="right-content">
                   <h2>Eleganță și Emoție</h2>
                   <p>
-                    Transformă-ți nunta într-o poveste de vis. Conectăm miri cu furnizori premium, pentru momente de neuitat, într-o experiență elegantă și intuitivă.
+                    Conectăm inimile îndrăgostite cu furnizori pasionați, pentru ca visul vostru să prindă contur, pas cu pas. Planificarea devine o bucurie, iar ziua cea mare — o amintire eternă.
                   </p>
                 </div>
               </div>

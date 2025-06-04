@@ -2,58 +2,69 @@
 body, html {
   margin: 0; padding: 0; height: 100%;
   font-family: 'Open Sans', sans-serif;
-  background: linear-gradient(135deg, #f9f4f1 0%, #fff7f3 100%);
+  background: url('images/back.jpg') no-repeat center center fixed;
+  background-size: cover;
   color: #4a3c31;
 }
 
+
 /* Card container */
 .wedding-card {
-  border-radius: 20px;
+  width: 100%;
+  height: auto;
+  background: transparent;
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
   overflow: hidden;
   box-shadow:
-    0 12px 20px rgba(218, 165, 32, 0.15),
+    0 12px 20px rgba(73, 65, 44, 0.15),
     0 8px 12px rgba(218, 165, 32, 0.1);
 }
 
+
 /* Left panel styling */
 .left-panel {
-  background: #fff;
+  background: transparent;
   padding: 3rem 3rem 4rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-/* Logo area */
-.logo-area .logo-img {
-  width: 90px;
-  margin-bottom: 15px;
-  filter: drop-shadow(0 2px 2px rgba(218, 165, 32, 0.3));
+
+
+
+
+.header-title {
+  text-align: center;
+  padding-top: 2rem;
 }
 
-.logo-area .title {
+.header-title .title {
   font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  font-size: 2.8rem;
-  color: #b5832b; /* auriu cald */
+  font-weight: 900;
+  font-size: 5rem;
+  color: #e4c38b;
   letter-spacing: 2px;
-  margin-bottom: 40px;
+  margin-bottom: 0.5rem;
 }
+
 
 /* Form styling */
 .login-form .form-control {
-  border: 2px solid #d6c59b;
+  border: 2px solid #2c1e04;
   border-radius: 12px;
   padding: 12px 15px;
   font-size: 1rem;
   transition: all 0.3s ease;
-  background-color: #fcfaf7;
+  background-color: #f3d7afd2;
 }
 
 .login-form .form-control:focus {
-  border-color: #b5832b;
-  box-shadow: 0 0 8px #b5832b44;
-  background-color: #fff;
+  border-color: #2c1e04;
+  box-shadow: none;
+  outline: none;
+  background-color: #f3d7afd2;
 }
 
 .login-form label {
@@ -64,28 +75,28 @@ body, html {
 /* Select styling */
 .login-form select.form-select {
   border-radius: 12px;
-  border: 2px solid #d6c59b;
+  border: 2px solid #2c1e04;
   padding: 10px 15px;
   font-size: 1rem;
-  background-color: #fcfaf7;
+  background-color: #f3d7afd2;
   transition: all 0.3s ease;
 }
 
 .login-form select.form-select:focus {
-  border-color: #b5832b;
+  border-color: #2c1e04;
   box-shadow: 0 0 8px #b5832b44;
 }
 
 /* Buttons */
 .btn-gradient {
-  background: linear-gradient(45deg, #b5832b, #f4d35e);
+  background: linear-gradient(45deg, #d9c29b, #cbb152);
   border: none;
-  color: #fff;
+  color: #342202;
   font-weight: 700;
   font-size: 1.1rem;
   padding: 14px 0;
   border-radius: 14px;
-  box-shadow: 0 6px 15px rgba(181, 131, 43, 0.5);
+  box-shadow: 0 6px 15px rgba(27, 23, 6, 0.5);
   transition: all 0.3s ease;
   cursor: pointer;
 }
@@ -118,9 +129,14 @@ body, html {
 }
 
 /* Right panel styling */
+
+.right-content {
+  margin-top: -7rem;
+}
+
 .right-panel {
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(15px);
+  background: transparent;
+  backdrop-filter: blur(5px);
   padding: 3rem 4rem;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
@@ -128,7 +144,7 @@ body, html {
   font-family: 'Playfair Display', serif;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
   text-align: center;
   position: relative;
@@ -137,20 +153,20 @@ body, html {
 
 /* Right content text */
 .right-content h2 {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 700;
   margin-bottom: 15px;
   letter-spacing: 1.3px;
-  color: #b5832b;
+  color: #e4c38b;
   font-family: 'Great Vibes', cursive;
 }
 
 .right-content p {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   line-height: 1.6;
   max-width: 400px;
   margin: 0 auto;
-  color: #5a4b37;
+  color: #b9a283;
 }
 
 /* Background floral pattern for right panel */
@@ -185,4 +201,6 @@ body, html {
   .right-content h2 {
     font-size: 2rem;
   }
+
+  
 }

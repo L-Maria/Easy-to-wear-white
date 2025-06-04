@@ -25,39 +25,32 @@ $result = $stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <title>Furnizori pentru <?= htmlspecialchars($serviciu) ?></title>
-    <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        .furnizor {
-            border: 1px solid #ccc;
-            padding: 12px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-        }
-    </style>
+    <link rel="stylesheet" href="categorii_f.css?v=1.3">
 </head>
 <body>
-    <h1>Furnizori pentru: <?= htmlspecialchars($serviciu) ?></h1>
-
+    <header>Furnizori pentru: <?= htmlspecialchars($serviciu) ?></header>
+    <div class="furnizori-wrapper">;
     <?php
     if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            echo '<div class="furnizor">';
-            echo '<strong>' . htmlspecialchars($row['nume']) . '</strong><br>';
-            echo 'Email: ' . htmlspecialchars($row['email']) . '<br>';
-            echo 'Telefon: ' . htmlspecialchars($row['telefon']) . '<br><br>';
+         while ($row = $result->fetch_assoc()): ?>
+            <article class="furnizor-card">
+            <div class="furnizor-content">
+                <div class="furnizor-info">
+                    <h2><?= htmlspecialchars($row['nume']) ?></h2>
+                    <p>Email: <?= htmlspecialchars($row['email']) ?></p>
+                    <p>Telefon: <?= htmlspecialchars($row['telefon']) ?></p>
+                </div>
+                <form method="get" action="read_only_f.php">
+                    <input type="hidden" name="id" value="<?= htmlspecialchars($row['id']) ?>">
+                    <button type="submit" class="go-to">Vezi profil</button>
+                </form>
+            </div>
+            </article>
+        <?php endwhile; 
 
-            // Buton către profilul furnizorului
-            echo '<form method="get" action="read_only_f.php" style="margin-top: 10px;">';
-            echo '<input type="hidden" name="id" value="' . htmlspecialchars($row['id']) . '">';
-            echo '<button type="submit" style="padding: 6px 12px; background-color: #007bff; color: white; border: none; border-radius: 4px;">Vezi profil</button>';
-            echo '</form>';
-
-            echo '</div>';
-
-        }
-    } else {
+        } else {
         echo "<p>Nu există furnizori pentru acest serviciu.</p>";
-    }
+        }
     ?>
 </body>
 </html>

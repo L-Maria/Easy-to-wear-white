@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     .mask {
-      background: rgba(132, 250, 176, 0.5);
+      background: transparent;
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -92,56 +92,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-  <section class="bg-image">
+  <section class="bg-login" style="background-image: url('images/miri.jpg'); 
+                                  background-size: 140%;  
+                                  background-position: 48% 28%; 
+                                  height: 100vh;">
     <div class="mask">
-      <div class="card">
+      <div class="card" style="background-color: transparent;">
         <div class="card-body">
-          <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+          <h2 class="text-uppercase text-center mb-5">Creaza cont</h2>
 
-          <form method="POST" action="">
+          <form method="POST" action="" >
             <div class="mb-4">
               <label for="nume" class="form-label">Nume</label>
-              <input type="text" id="nume" name="nume" class="form-control form-control-lg" required />
+              <input type="text" id="nume" name="nume" class="form-control form-control-lg" style="background-color: lightgrey;" required />
             </div>
 
             <div class="mb-4">
               <label for="email" class="form-label">Email</label>
-              <input type="email" id="email" name="email" class="form-control form-control-lg" required />
+              <input type="email" id="email" name="email" class="form-control form-control-lg" style="background-color: lightgrey;" required />
             </div>
 
             <div class="mb-4">
               <label for="parola" class="form-label">Parola</label>
-              <input type="password" id="parola" name="parola" class="form-control form-control-lg" required />
+              <input type="password" id="parola" name="parola" class="form-control form-control-lg" style="background-color: lightgrey;" required />
             </div>
 
             <div class="mb-4">
               <label for="telefon" class="form-label">Numar de telefon</label>
-              <input type="tel" id="telefon" name="telefon" class="form-control form-control-lg" required />
+              <input type="tel" id="telefon" name="telefon" class="form-control form-control-lg" style="background-color: lightgrey;" required />
             </div>
 
             <div class="mb-4">
               <label for="religie" class="form-label">Religie</label>
-              <input type="text" id="religie" name="religie" class="form-control form-control-lg" required />
+              <input type="text" id="religie" name="religie" class="form-control form-control-lg" style="background-color: lightgrey;" required />
             </div>
 
             <div class="mb-4">
               <label for="data_nunta" class="form-label">Data nuntii</label>
-              <input type="date" id="data_nunta" name="data_nunta" class="form-control form-control-lg" required />
+              <input type="date" id="data_nunta" name="data_nunta" class="form-control form-control-lg" style="background-color: lightgrey;" required />
             </div>
 
             <div class="mb-4">
               <label for="locatie" class="form-label">Locatie</label>
-              <input type="text" id="locatie" name="locatie" class="form-control form-control-lg" required />
+              <input type="text" id="locatie" name="locatie" class="form-control form-control-lg" style="background-color: lightgrey;" required />
             </div>
 
             <div class="mb-4">
               <label for="invitati" class="form-label">Numar de invitati</label>
-              <input type="number" id="invitati" name="invitati" class="form-control form-control-lg" min="1" required />
+              <input type="number" id="invitati" name="invitati" class="form-control form-control-lg" min="1" style="background-color: lightgrey;" required />
             </div>
 
             <div class="d-flex justify-content-center">
-              <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">
-                Register
+              <button type="submit" class="btn  btn-block btn-lg  text-body">
+                Inregistrare
               </button>
             </div>
 

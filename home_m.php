@@ -32,6 +32,28 @@ if ($result_user->num_rows !== 1) {
 $user_data = $result_user->fetch_assoc();
 $stmt_user->close();
 
+// Ia serviciile furnizorilor care au acceptat oferta pentru clientul curent
+$servicii_acceptate = [];
+
+$stmt = $conn->prepare("
+    SELECT f.serviciu, f.nume
+    FROM notificari n 
+    JOIN furnizor f ON n.furnizor_id = f.id 
+    WHERE n.client_id = ? AND n.oferta_acceptata = 1
+");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+while ($row = $result->fetch_assoc()) {
+    $serviciu = strtolower(trim($row['serviciu']));
+    $nume_furnizor = $row['nume'];
+    $servicii_acceptate[$serviciu] = $nume_furnizor;
+}
+
+$stmt->close();
+
+
 // Salvează detalii dacă formularul a fost trimis
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['detalii'])) {
     $detalii = trim($conn->real_escape_string($_POST['detalii']));
@@ -77,10 +99,10 @@ $stmt->close();
 
         <form method="post" style="max-width: 500px; margin-top: 20px;">
             <label for="detalii" style="font-weight: bold;">Imi doresc...
-            <textarea name="detalii" id="detalii" rows="5" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+            <textarea name="detalii" id="detalii" rows="5" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;background: #faf9d9; ">
             <?php echo htmlspecialchars($detaliiExistente ?? ''); ?>
             </textarea>
-            <button type="submit" class="btn btn-primary mt-2">Salvează</button>
+            <button type="submit" class="upload-btn">Salvează</button>
         </form>
     </div>
 
@@ -99,13 +121,24 @@ $stmt->close();
         ];
 
         foreach ($taskuri as $task) {
-            echo '<div class="task">';
-            echo '<a href="categorii_f.php?serviciu=' . urlencode($task) . '" target="_blank">';
-            echo '<button>' . htmlspecialchars($task) . '</button>';
-            echo '</a>';
-            echo '<input type="checkbox">';
-        echo '</div>';
-        }
+    $task_lc = strtolower(trim($task)); // Normalizează denumirea
+$isChecked = isset($servicii_acceptate[$task_lc]);
+
+echo '<div class="task">';
+echo '<a href="categorii_f.php?serviciu=' . urlencode($task) . '" target="_blank">';
+echo '<button>' . htmlspecialchars($task) . '</button>';
+echo '</a>';
+
+if ($isChecked) {
+    echo '<span style="margin-left: 10px; margin-right: 10px; font-style: italic; color: #333;">' . htmlspecialchars($servicii_acceptate[$task_lc]) . '</span>';
+}
+
+echo '<input type="checkbox" disabled ' . ($isChecked ? 'checked' : '') . '>';
+echo '</div>';
+
+}
+
+
         ?>
     </div>
 </main>

@@ -1,21 +1,25 @@
 /* Font elegant, serif pentru titluri si sans-serif pentru text */
-body {
-    font-family: 'Open Sans', sans-serif;
-    margin: 0;
-    background-color: #faf9f7;
-    color: #3e3e3e;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('images/padure.jpg'); 
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px);
+  z-index: -1;
 }
 
 header {
     font-family: 'Playfair Display', serif;
-    background-color: #fff;
+    background-color: #0e380b;
     padding: 30px 20px;
     font-size: 2.5rem;
     font-weight: 700;
-    color: #5a4a42;
+    color: #fce3cb;
     text-align: center;
     box-shadow: 0 2px 6px rgba(90, 74, 66, 0.15);
     letter-spacing: 2px;
@@ -32,8 +36,8 @@ main {
 }
 
 .panel-stanga {
-    flex: 1;
-    background-color: #fff;
+    width: 300px;
+    background-color: #faf9d9;
     border-radius: 12px;
     padding: 30px 25px;
     box-shadow: 0 6px 15px rgba(90, 74, 66, 0.1);
@@ -43,7 +47,7 @@ main {
     font-family: 'Playfair Display', serif;
     font-size: 1.8rem;
     margin-bottom: 20px;
-    border-bottom: 2px solid #d8cfc7;
+    border-bottom: 2px solid #084114;
     padding-bottom: 10px;
     color: #7c6a5a;
 }
@@ -60,8 +64,8 @@ main {
 }
 
 .todo {
-    flex: 2;
-    background-color: #fff;
+    width: 600px;
+    background-color: #faf9d9;
     border-radius: 12px;
     padding: 30px 35px;
     box-shadow: 0 6px 15px rgba(90, 74, 66, 0.1);
@@ -72,7 +76,7 @@ main {
     font-size: 2rem;
     margin-bottom: 30px;
     color: #7c6a5a;
-    border-bottom: 2px solid #d8cfc7;
+    border-bottom: 2px solid #084114;
     padding-bottom: 12px;
 }
 
@@ -83,13 +87,13 @@ main {
     padding: 14px 20px;
     margin-bottom: 18px;
     border-radius: 8px;
-    background-color: #f7f3ee;
+    background-color: #bed3be;
     box-shadow: inset 0 0 8px rgba(90, 74, 66, 0.05);
     transition: background-color 0.3s ease;
 }
 
 .task:hover {
-    background-color: #e8dfd3;
+    background-color: #7c9577;
 }
 
 .task button {
@@ -97,7 +101,7 @@ main {
     border: none;
     font-family: 'Playfair Display', serif;
     font-size: 1.1rem;
-    color: #7c6a5a;
+    color: #7c683b;
     cursor: pointer;
     flex-grow: 1;
     text-align: left;
@@ -114,10 +118,30 @@ main {
     width: 22px;
     height: 22px;
     cursor: pointer;
-    accent-color: #7c6a5a;
+    accent-color: #2a5515;
     border-radius: 5px;
     box-shadow: 0 0 0 1.5px #7c6a5a inset;
     transition: accent-color 0.3s ease;
+}
+
+
+button.upload-btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.upload-btn {
+  background: #7c9577;
+  color: #3e3418;
+}
+
+.upload-btn:hover {
+  background: #294e28;
+  color: #c7b88f;
 }
 
 /* Responsive pentru mobil */

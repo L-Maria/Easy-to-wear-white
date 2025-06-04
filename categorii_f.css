@@ -1,0 +1,80 @@
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('images/padure.jpg'); 
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px);
+  z-index: -1;
+}
+
+header {
+    font-family: 'Playfair Display', serif;
+    background-color: #0e380b;
+    padding: 30px 20px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fce3cb;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(90, 74, 66, 0.15);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.furnizor-card {
+    border: 1px solid #5b9851;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(149, 234, 128, 0.692);
+
+    max-width: 800px; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.furnizor-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+
+}
+
+.furnizor-info {
+    color: #ffffff;
+    flex: 1;
+    min-width: 300px;
+    text-align:center;
+    width: 100;
+}
+
+button.go-to {
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.go-to {
+  background: #9df4ba;
+  color: #271f0b;
+}
+
+.go-to:hover {
+  background: #11250b;
+  color: #d6c7a0;
+}
+
+
+.furnizori-wrapper {
+    margin-top: 1cm;
+}
+

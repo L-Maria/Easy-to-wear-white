@@ -48,20 +48,85 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Register</title>
-  <link rel="stylesheet" href="register_m.css" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css" rel="stylesheet" />
-</head>
 
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css" rel="stylesheet" />
+
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css" rel="stylesheet" />
+
+  <style>
+   /* Fundal transparent pentru toate inputurile și selectul */
+.form-control {
+  background-color: transparent !important;
+  color: black !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Fundalul intern adăugat de MDB - override direct containerul */
+.form-outline .form-control {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  color: black !important;
+}
+
+/* Textul în interiorul inputurilor (placeholder/label animat) */
+.form-label {
+  color: black !important;
+}
+
+/* Borduri focus - opțional: eliminăm culoarea albastră mdb */
+.form-outline .form-control:focus {
+  border-color: rgba(0, 0, 0, 0.5) !important;
+  box-shadow: none !important;
+}
+
+/* Select transparent + text negru */
+select.form-control {
+  background-color: transparent !important;
+  color: black !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Label "Alege tipul de serviciu:" */
+.form-group > label {
+  color: black !important;
+}
+
+.form-outline .form-control::placeholder {
+  color: black !important;
+  opacity: 1 !important;
+}
+
+
+  </style>
+
+
+</head>
+<style>
+.mask {
+      background: transparent;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+</style>
 <body>
-<section class="vh-100 bg-image"
-  style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
-  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+<section class="bg-login" style="background-image: url('images/furnizori.jpg'); 
+                                  background-size: 50%;  
+                                  background-position: 50% 50%; 
+                                  height: 100vh;">
+  <div class="mask">                      
     <div class="container h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100" >
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-          <div class="card" style="border-radius: 15px;">
-            <div class="card-body p-5">
-              <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+          <div class="card" style="border-radius: 15px; background-color: rgba(255, 255, 255, 0.1); backdrop-filter: blur(35px); border: 1px solid rgba(255, 255, 255, 0.2);">
+            <div class="card-body p-5" >
+              <h2 class="text-uppercase text-center mb-5" style="color:rgb(0, 0, 0);">Creeaza cont</h2>
 
               <?php if (!empty($error)): ?>
                 <div class="alert alert-danger text-center"><?= htmlspecialchars($error) ?></div>
@@ -69,35 +134,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
               <form method="post" action="">
 
-                <div data-mdb-input-init class="form-outline mb-4">
+                <div class="form-outline mb-4">
                   <input type="text" id="nume" name="nume" class="form-control form-control-lg" required
                          value="<?= isset($_POST['nume']) ? htmlspecialchars($_POST['nume']) : '' ?>" />
-                  <label class="form-label" for="nume">Numele tau</label>
+                  <label class="form-label" for="nume" >Numele tau</label>
                 </div>
 
-                <div data-mdb-input-init class="form-outline mb-4">
+                <div class="form-outline mb-4">
                   <input type="email" id="email" name="email" class="form-control form-control-lg" required
                          value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '' ?>" />
                   <label class="form-label" for="email">Email-ul tau</label>
                 </div>
 
-                <div data-mdb-input-init class="form-outline mb-4">
+                <div class="form-outline mb-4">
                   <input type="password" id="parola" name="parola" class="form-control form-control-lg" required />
                   <label class="form-label" for="parola">Parola ta</label>
                 </div>
 
-                <div data-mdb-input-init class="form-outline mb-4">
+                <div class="form-outline mb-4">
                   <input type="password" id="parola2" name="parola2" class="form-control form-control-lg" required />
                   <label class="form-label" for="parola2">Repeta parola</label>
                 </div>
 
-                <div data-mdb-input-init class="form-outline mb-4">
+                <div class="form-outline mb-4">
                   <input type="tel" id="telefon" name="telefon" class="form-control form-control-lg" required
                     value="<?= isset($_POST['telefon']) ? htmlspecialchars($_POST['telefon']) : '' ?>" />
                   <label class="form-label" for="telefon">Numarul tau de telefon</label>
                 </div>
 
-                <div data-mdb-input-init class="form-group mb-4">
+                <div class="form-outline mb-4">
                   <label for="serviciu">Alege tipul de serviciu:</label>
                   <select class="form-control" name="serviciu" required>
                     <option value="">-- Selectează --</option>
@@ -116,12 +181,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
                 <div class="d-flex justify-content-center">
-                  <button type="submit" data-mdb-button-init data-mdb-ripple-init
-                    class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                  <button type="submit" class="btn  btn-block btn-lg  text-body">Inregistrare </button>
                 </div>
 
-                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!"
-                    class="fw-bold text-body"><u>Login here</u></a></p>
+                
 
               </form>
 
